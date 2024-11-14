@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine Discounts</title>
+</head>
+<body>
+
+<h1>Medicine Discount Calculation</h1>
+<button onclick="applyDiscountToMedicines()">Calculate Discounts</button>
+
+<script>
+// Початковий масив з медикаментами
+const medicines = [
+    { name: "Noshpa", price: 170 },
+    { name: "Analgin", price: 55 },
+    { name: "Quanil", price: 310 },
+    { name: "Alphacholine", price: 390 },
+];
+
+// Функція для застосування знижки та додавання ідентифікаторів
+function applyDiscount(medicines) {
+    return medicines.map((medicine, index) => ({
+        id: index + 1, // Додаємо унікальний ідентифікатор
+        name: medicine.name,
+        price: medicine.price > 300 ? medicine.price * 0.7 : medicine.price, // Знижка 30% якщо ціна > 300
+    }));
+}
+
+// Функція для обчислення знижок та виводу результату в консоль
+function applyDiscountToMedicines() {
+    const discountedMedicines = applyDiscount(medicines);
+    console.log(discountedMedicines);
+}
+</script>
+
+</body>
+</html>

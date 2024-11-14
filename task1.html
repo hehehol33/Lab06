@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+</head>
+<body>
+
+<h1>Product Details</h1>
+<input type="text" id="productIdInput" placeholder="Enter Product ID">
+<button onclick="fetchProductDetails()">Get Product Details</button>
+
+<div id="result"></div>
+
+<script>
+// Масив об'єктів з деталями товарів
+const products = [
+    { id: 1, name: 'Laptop', price: 1200 },
+    { id: 2, name: 'Phone', price: 700 },
+    { id: 3, name: 'Tablet', price: 300 },
+];
+
+// Функція для отримання деталей товару за productId
+function getProductDetails(productId, successCallback, errorCallback) {
+    const product = products.find(item => item.id === productId);
+    if (product) {
+        successCallback(product);
+    } else {
+        errorCallback(`Product with ID ${productId} not found.`);
+    }
+}
+
+// Callback для успішного отримання даних
+const successCallback = (product) => {
+    document.getElementById('result').innerHTML = `
+        <p><strong>Product Name:</strong> ${product.name}</p>
+        <p><strong>Price:</strong> $${product.price}</p>
+    `;
+};
+
+// Callback для помилки
+const errorCallback = (errorMessage) => {
+    document.getElementById('result').innerHTML = `<p style="color: red;">${errorMessage}</p>`;
+};
+
+// Функція для отримання productId з HTML та виклику getProductDetails
+function fetchProductDetails() {
+    const productId = parseInt(document.getElementById('productIdInput').value);
+    getProductDetails(productId, successCallback, errorCallback);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concerts</title>
+</head>
+<body>
+
+<h1>Upcoming Concerts</h1>
+<button onclick="getUpcomingConcertCities()">Show Upcoming Concert Cities</button>
+
+<script>
+// Об'єкт з датами концертів по містах
+const concerts = {
+    Київ: new Date("2020-04-01"),
+    Умань: new Date("2025-07-02"),
+    Вінниця: new Date("2020-04-21"),
+    Одеса: new Date("2025-03-15"),
+    Хмельницький: new Date("2020-04-18"),
+    Харків: new Date("2025-07-10"),
+};
+
+// Функція для отримання імен міст з майбутніми концертами
+const getUpcomingConcertCities = () => {
+    const today = new Date();
+    const upcomingConcerts = Object.entries(concerts)
+        .filter(([city, date]) => date > today) // Фільтруємо міста з майбутніми датами
+        .sort((a, b) => a[1] - b[1]) // Сортуємо за датою
+        .map(([city]) => city); // Отримуємо масив імен міст
+
+    console.log(upcomingConcerts); // Виводимо результат у консоль
+};
+</script>
+
+</body>
+</html>

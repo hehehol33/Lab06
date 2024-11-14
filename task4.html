@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storage Management</title>
+</head>
+<body>
+
+<h1>Storage Management</h1>
+<button onclick="showItems()">Show Items</button>
+<button onclick="addItem('orange')">Add 'orange'</button>
+<button onclick="removeItem('banana')">Remove 'banana'</button>
+
+<script>
+// Функція-конструктор Storage
+function Storage(items) {
+    this.items = items; // Ініціалізація початкового масиву товарів
+
+    // Метод для отримання масиву товарів
+    this.getItems = function() {
+        return this.items;
+    };
+
+    // Метод для додавання нового товару
+    this.addItem = function(item) {
+        this.items.push(item);
+    };
+
+    // Метод для видалення товару
+    this.removeItem = function(item) {
+        const index = this.items.indexOf(item);
+        if (index !== -1) {
+            this.items.splice(index, 1);
+        }
+    };
+}
+
+// Початковий масив товарів
+const arr = ["apple", "banana", "mango"];
+
+// Створення екземпляра Storage
+const storage = new Storage(arr);
+
+// Функція для показу товарів у консолі
+function showItems() {
+    console.log("Items in storage:", storage.getItems());
+}
+
+// Функція для додавання товару
+function addItem(item) {
+    storage.addItem(item);
+    console.log(`Added '${item}' to storage.`);
+    showItems();
+}
+
+// Функція для видалення товару
+function removeItem(item) {
+    storage.removeItem(item);
+    console.log(`Removed '${item}' from storage.`);
+    showItems();
+}
+</script>
+
+</body>
+</html>

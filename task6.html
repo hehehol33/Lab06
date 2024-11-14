@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bracket Checker</title>
+</head>
+<body>
+
+<h1>Bracket Checker</h1>
+<button onclick="runBracketCheck()">Check Brackets</button>
+
+<script>
+// Функція для перевірки правильності закриття дужок
+function checkBrackets(str) {
+    const stack = [];
+    const brackets = {
+        '(': ')',
+        '{': '}',
+        '[': ']'
+    };
+
+    for (let char of str) {
+        if (brackets[char]) {
+            // Якщо це відкрита дужка, додаємо її у стек
+            stack.push(char);
+        } else if (Object.values(brackets).includes(char)) {
+            // Якщо це закрита дужка, перевіряємо, чи відповідає вона останній відкритій
+            if (brackets[stack.pop()] !== char) {
+                return false;
+            }
+        }
+    }
+
+    // Повертаємо true, якщо стек порожній, тобто всі дужки правильно закриті
+    return stack.length === 0;
+}
+
+// Функція для запуску перевірки та виведення результату
+function runBracketCheck() {
+    const code = "function someFn() { return [1, 2, { a: (5 + 3) }]; }"; // Приклад рядка коду
+    const isValid = checkBrackets(code);
+    console.log(`Is the bracket structure valid? ${isValid}`);
+}
+</script>
+
+</body>
+</html>
